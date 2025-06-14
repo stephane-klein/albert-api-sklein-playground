@@ -74,7 +74,7 @@ $ ./scripts/check-openapi-api-connection.sh
 
 ## Exploration des collections
 
-Documentation du endpoint [`Get Collections`](https://albert.api.etalab.gouv.fr/documentation#tag/Collections/operation/get_collections_v1_collections_get).
+Utilisation du endpoint [`Get Collections`](https://albert.api.etalab.gouv.fr/documentation#tag/Collections/operation/get_collections_v1_collections_get).
 
 ```sh
 $ ./scripts/get-collections.sh
