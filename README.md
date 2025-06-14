@@ -8,7 +8,7 @@ Vous pouvez effectuer une demande d'accès à cette adresse : <https://alliance.
 
 ## Conventions
 
-La documentation (fichiers `*.md`) est rédigée en français, tandis que le code source, les scripts et les noms de fichiers utilisent l'anglais.
+La documentation (fichiers `*.md`) est rédigée en français, tandis que le code source des scripts (*bash* ou *python*), les commits messages et les noms de fichiers utilisent l'anglais.
 
 ## Configuration du workspace
 
