@@ -71,3 +71,43 @@ $ ./scripts/check-openapi-api-connection.sh
   }
 ]
 ```
+
+## Exploration des collections
+
+Documentation du endpoint [`Get Collections`](https://albert.api.etalab.gouv.fr/documentation#tag/Collections/operation/get_collections_v1_collections_get).
+
+```sh
+$ ./scripts/get-collections.sh
+{
+  "object": "list",
+  "data": [
+    {
+      "object": "collection",
+      "id": 242,
+      "name": "plus.transformation.gouv.fr",
+      "owner": "etalab@modernisation.gouv.fr",
+      "description": null,
+      "visibility": "private",
+      "created_at": 1745498507,
+      "updated_at": 1745498507,
+      "documents": 80977
+    },
+    ...
+```
+
+Détail d'une collection par son `id`:
+
+```sh
+$ ./scripts/get-collection.sh 783
+{
+  "object": "collection",
+  "id": 783,
+  "name": "annuaire-administrations-etat",
+  "owner": "faheem.beg@data.gouv.fr",
+  "description": "Annuaire des administrations d'état",
+  "visibility": "public",
+  "created_at": 1748423004,
+  "updated_at": 1748423004,
+  "documents": 7864
+}
+```
