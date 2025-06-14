@@ -1,0 +1,7 @@
+[tools]
+python = "3.13.5"
+jq="1.7.1"
+
+[env]
+_.source = { value = "./.envrc", tools = true }
+_.python.venv = { path = ".venv", create = true, uv_create_args = ['--seed'] }
