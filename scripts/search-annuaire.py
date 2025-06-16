@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-import requests
 import os
 import sys
+import requests
 
 session = requests.Session()
 session.headers.update({
