@@ -20,6 +20,7 @@ Prérequis:
 
 ```sh
 $ mise install
+$ pip install -r requirements.txt
 ```
 
 Configuration des tokens d'accès à <https://albert.api.etalab.gouv.fr>
@@ -84,7 +85,7 @@ $ ./scripts/get-collections.sh
     {
       "object": "collection",
       "id": 242,
-      "name": "plus.transformation.gouv.fr",
+      "name": "plus.transformation.gouv.fr", b
       "owner": "etalab@modernisation.gouv.fr",
       "description": null,
       "visibility": "private",
@@ -110,4 +111,81 @@ $ ./scripts/get-collection.sh 783
   "updated_at": 1748423004,
   "documents": 7864
 }
+```
+
+## J'effectue des recherches dans la collection « Annuaire des administrations d'état »
+
+Utilisation du endpoint [`/v1/search`](https://albert.api.etalab.gouv.fr/documentation#tag/Search)
+
+```
+$ ./scripts/search-annuaire.py "Qui est François Bayrou" | jq
+{
+  "object": "list",
+  "data": [
+    {
+      "method": "semantic",
+      "score": 0.56030065,
+      "chunk": {
+        "object": "chunk",
+        "id": 1,
+        "metadata": {
+          "chunk_id": "a515667c-6dc0-4544-a1a8-2cf13d7da23b",
+          "types": "Administration centrale (ou Ministère)",
+          "name": "Premier ministre",
+          "mission_description": "",
+          "addresses": [
+            {
+              "pays": "France",
+              "adresse": "Hôtel Matignon  57 rue de Varenne",
+              "commune": "Paris",
+              "latitude": "48.85428",
+              "longitude": "2.320638",
+              "code_postal": "75007"
+            },
+            {
+              "pays": "France",
+              "adresse": "57 rue de Varenne",
+              "commune": "Paris SP 07",
+              "latitude": "",
+              "longitude": "",
+              "code_postal": "75700"
+            }
+          ],
+          "phone_numbers": [
+            "01 42 75 80 00"
+          ],
+          "mails": [],
+          "urls": [
+            "https://www.info.gouv.fr"
+          ],
+          "social_medias": [],
+          "mobile_applications": [],
+          "opening_hours": "{}",
+          "contact_forms": [
+            "https://www.info.gouv.fr/contact/premier-ministre"
+          ],
+          "additional_information": "",
+          "modification_date": "03/02/2025",
+          "siret": "11000101300017",
+          "siren": "110001013",
+          "people_in_charge": [
+            {
+              "fonction": "Premier ministre",
+              "personne": {
+                "nom": "BAYROU",
+                "grade": "",
+                "prenom": "François",
+                "civilite": "M.",
+                "texte_reference": [
+                  {
+                    "valeur": "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000050774288",
+                    "libelle": "JORF n°0295 du 14 décembre 2024"
+                  }
+                ],
+                "adresse_courriel": []
+              },
+              "telephone": ""
+            }
+          ],
+...
 ```
