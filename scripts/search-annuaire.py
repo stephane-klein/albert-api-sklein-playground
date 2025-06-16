@@ -14,7 +14,7 @@ response = session.post(
     json={
         'collections': [783],         # Annuaire des administrations d'état
         'rff_k': 20,                  # for now I don't know what this is
-        'k': 3,                      # Top K
+        'k': 3,                       # Top K
         'method': 'semantic',         # for now I don't know the functional consequences
         'score_threshold': 0.35,      # for now I don't know what this is
         'web_search': False,
