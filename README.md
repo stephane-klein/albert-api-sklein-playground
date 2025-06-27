@@ -225,3 +225,20 @@ $ ./src/test_rag_annuaire.py
 Ran 1 test in 4.432s
 
 OK
+```
+
+## Image Docker Open WebUI Pipelines custom
+
+Le fichier [`./Dockerfile`](./Dockerfile) est une version personnalisée de [Open WebUI Pipelines](https://github.com/open-webui/pipelines/blob/main/Dockerfile) avec les dépendances spécifiées dans [`./requirements.txt`](./requirements.txt).
+
+Voici comment build l'image :
+
+```sh
+$ ./scripts/build-openwebui-pipelines-docker.sh
+```
+
+Et pour push l'image vers `stephaneklein/openwebui-pipelines:latest` :
+
+```sh
+$ ./scripts/push-openwebui-pipelines-docker.sh
+```
