@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 import os
-from typing import List, Union, Generator, Iterator
+from typing import List, Union, Generator, Iterator, Optional
 from inspect import cleandoc
 import argparse
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
 from openai import OpenAI
 from jinja2 import Template
 import requests
@@ -27,10 +27,18 @@ import requests
 
 class Pipeline:
     class Valves(BaseModel):
-        ALBERT_OPENAI_API_KEY: str = Field(default=os.environ['ALBERT_OPENAI_API_KEY'])
+        ALBERT_OPENAI_API_KEY: Optional[str] = None
+
+    async def on_startup(self):
+        print(f"on_startup: {__name__}")
+
+    async def on_shutdown(self):
+        print(f"on_shutdown: {__name__}")
 
     def __init__(self):
-        self.valves = self.Valves()
+        self.valves = self.Valves(**{
+            "ALBERT_OPENAI_API_KEY": os.getenv("ALBERT_OPENAI_API_KEY", "your-albert-openai-api-key-here")
+        })
         self.name = "search annuaire RAG"
 
     def pipe(
