@@ -184,6 +184,7 @@ class Pipeline:
                 search_response[row['index']] for row in rerank_response
             ]
 
+
             # Final step, response generation
             generate_response_prompt = Template(cleandoc("""
                 <context trouvé dans la base>
@@ -226,11 +227,13 @@ class Pipeline:
                 ]
             )
 
+            yield f"{result.choices[0].message.content}"
+
             yield {
                 "event": {
                     "type": "status",
                     "data": {
-                        "description": result.choices[0].message.content,
+                        "description": "",
                         "done": True,
                     },
                 }
@@ -244,11 +247,17 @@ if __name__ == "__main__":
     parser.add_argument('query')
     args = parser.parse_args()
     pipeline = Pipeline()
-    for event in pipeline.pipe(
+    for chunk in pipeline.pipe(
         user_message=args.query,
         model_id=None,
         messages=None,
         body=None
     ):
-        print(event['event']['data']['description'])
+        if isinstance(chunk, str):
+            print(chunk)
+        elif 'event' in chunk:
+            print(f"info: {chunk['event']['data']['description']}")
+        else:
+            print(f"Error unknown chunk type: {chunk}")
+
         print()

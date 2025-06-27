@@ -7,7 +7,7 @@ from rag_annuaire import Pipeline
 class TestRagAnnuaire(unittest.TestCase):
     def test_search_annuaire_rag(self):
         pipeline = Pipeline()
-        events = list(
+        chunk = list(
             pipeline.pipe(
                 user_message="Qui est François Bayrou",
                 model_id=None,
@@ -16,15 +16,15 @@ class TestRagAnnuaire(unittest.TestCase):
             )
         )
         self.assertEqual(
-            events[0]["event"]["data"]["description"],
+            chunk[0]["event"]["data"]["description"],
             "Je cherche..."
         )
         self.assertEqual(
-            events[1]["event"]["data"]["description"],
+            chunk[1]["event"]["data"]["description"],
             "Recherche en cours pour 'Comment est François Bayrou ?'"
         )
         self.assertEqual(
-            events[2]["event"]["data"]["description"].strip(),
+            chunk[2].strip(),
             cleandoc("""
             François Bayrou est un homme politique français qui occupe plusieurs postes importants. Voici les informations disponibles sur lui :
 
