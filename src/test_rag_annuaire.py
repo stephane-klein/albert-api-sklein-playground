@@ -2,11 +2,19 @@
 import unittest
 from inspect import cleandoc
 
-from rag_annuaire import search_annuaire_rag
+from rag_annuaire import Pipeline
 
 class TestRagAnnuaire(unittest.TestCase):
     def test_search_annuaire_rag(self):
-        events = list(search_annuaire_rag("Qui est François Bayrou"))
+        pipeline = Pipeline()
+        events = list(
+            pipeline.pipe(
+                user_message="Qui est François Bayrou",
+                model_id=None,
+                messages=None,
+                body=None
+            )
+        )
         self.assertEqual(
             events[0]["event"]["data"]["description"],
             "Je cherche..."
