@@ -1,5 +1,7 @@
 [tools]
-python = "3.13.5"
+# Using Python 3.11 to match the version used by Open WebUI Pipelines
+# https://github.com/open-webui/pipelines/blob/adec65727e69cfd4e0a6ea30cf85ed0443f4a89a/Dockerfile#L1
+python = "3.11"
 jq="1.7.1"
 
 [env]
