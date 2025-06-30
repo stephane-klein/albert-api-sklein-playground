@@ -227,6 +227,20 @@ Ran 1 test in 4.432s
 OK
 ```
 
+## J'effectue des recherches dans les collections "travail-emploi" et "service-public"
+
+Utilisation du endpoint [`/v1/search`](https://albert.api.etalab.gouv.fr/documentation#tag/Search)
+
+```
+$ ./scripts/search-emploi-et-service-public.py "Ma soeur va se marier, j'ai le droit a des jours de congés ?" | jq
+...
+```
+
+```
+$ ./scripts/search-emploi-et-service-public.py "Quel est le prix du renouvellement de carte d'identité ?" | jq
+...
+```
+
 ## Image Docker Open WebUI Pipelines custom
 
 Le fichier [`./Dockerfile`](./Dockerfile) est une version personnalisée de [Open WebUI Pipelines](https://github.com/open-webui/pipelines/blob/main/Dockerfile) avec les dépendances spécifiées dans [`./requirements.txt`](./requirements.txt).
