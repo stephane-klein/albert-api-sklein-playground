@@ -75,62 +75,38 @@ class Pipeline:
                 {
                     "role": "system",
                     "content": cleandoc("""
-                        Tu es Assistant Administrations, un assistant développé par l'Etalab qui répond à des
-                        questions en te basant sur un contexte.
+                        Tu te nommes "Assistant Administrations", un assistant développé par l'Etalab.
 
-                        Tu parles en français. Tu es précis et poli.
+                        Tu es connecté à la base de données véctorielle "Référentiel de l'organisation administrative de l'Etat"
+                        qui comprend toutes les institutions régies par la Constitution de la Ve République et les administrations
+                        qui en dépendent, soit environ 6000 organismes.  
+                        Le périmètre couvre les services centraux de l’Etat, jusqu’au niveau des bureaux.
 
-                        Tu es connecté aux collections suivantes : "annuaire-administrations-etat" sur AlbertAPI.
-
-                        Ce que tu sais faire : Tu sais répondre aux questions et chercher dans les bases de connaissance de Albert API
-                        qui concerne les administrations publiques.
-
-                        Pour les questions sur des sujets spécifiques autres que les administrations publiques,
-                        invites l'utilisateur à se tourner vers un autre assistant spécialisé.
-
-                        Ne donnes pas de sources si tu réponds à une question meta ou sur toi.
+                        Ce que tu sais faire : tu sais répondre aux questions en lien avec cette base de données.
                     """)
                 },
                 {
                     "role": "user",
                     "content": cleandoc(f"""
-                        Tu es un assistant qui cherche des documents pour répondre à une question.
+                        # Optimisation de requête pour recherche vectorielle
 
-                        Tu peux chercher des informations sur les administrations publiques ou les personnes y travaillant en utilisant les mots clés suivants :
+                        Votre rôle : Vous êtes un assistant spécialisé dans l'optimisation des requêtes de recherche pour une base de données vectorielle sur l'organisation administrative française.
 
-                        - nom et prénom de la personne
-                        - nom de l'administration
-                        - code postal
-                        - ville
-                        - pays
+                        ## Votre tâche
 
-                        Pour une recherche sur une personne, tu peux répondre avec uniquement le nom et prénom.
+                        Reformulez la question suivante de l'utilisateur pour la rendre plus efficace lors de la recherche vectorielle dans le "Référentiel de l'organisation administrative de l'État".
 
-                        Analyse cette question d'utilisateur et détermine si elle nécessite une recherche dans la base de données.
+                        Question de l'utilisateur : [{query}]
 
-                        QUESTION ACTUELLE: "{query}"
+                        Retourne uniquement la reformulation. Rien de plus.
+                        Ne précise pas que la recherche doit se faire dans « Référentiel de l'organisation administrative de l'État ».
 
-                        TÂCHE:
+                        Exemples :
 
-                        - Si la question nécessite une recherche documentaire (informations factuelles, procédures, tarifs, etc.),
-                          reformule-la en une question complète et autonome qui intègre si besoin le contexte de l'historique.
-                        - Réponds uniquement par la question reformulée.
-                        - Si la question N'A PAS BESOIN de recherche documentaire, réponds exactement: no_search
-
-                        Exemple de CAS de no_search:
-
-                        - Salutations (bonjour, merci, au revoir)
-                        - Questions sur ton fonctionnement
-                        - Demandes de clarification vagues sans contexte suffisant
-                        - Conversations générales
-                        - Questions d'opinion
-
-                        EXEMPLES:
-
-                        - Historique: "USER: Quel est le prix du renouvellement de carte d'identité ?"
-                        - Question: "Comment faire ?" → Comment renouveler une carte d'identité ?
-                        - Question: "Bonjour" → no_search
-                        - Question: "Tu peux m'aider ?" → no_search
+                        - Question : « Qui est François Bayrou ? »
+                          Réponse : « Quelle est l'adresse de François Bayrou »
+                        - Quesiton : « Qui est l'actuel directeur de la DINUM ? »
+                          Réponse : « Quelle est l'adresse du directeur DINUM » 
                     """)
                 }
             ]
