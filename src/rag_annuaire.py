@@ -137,7 +137,42 @@ class Pipeline:
         ).choices[0].message.content
 
         if query_reformulation_result == "no_search":
-            print("pas de recherche")
+            result = client.chat.completions.create(
+                model="albert-small",
+                stream=False,
+                temperature=0,
+                max_tokens=200,
+                messages=[
+                    {
+                        "role": "user",
+                        "content": cleandoc(f"""
+                            L'utilisateur a posé la question suivante : « {query} »
+                            
+                            Cette question n'a pas de lien avec l'annuaire de l'administration de l'État.
+
+                            Réponds directement sans formules de politesse ni salutations.
+
+                            Réponds à l'utilisateur en mois de 80 mots et invite-le à se tourner vers un autre assistant ou un modèle de langage généraliste comme par exemple "Tâches simples" ou "Tâches complexes".
+
+                            N'essaie pas de répondre à la question de l'utilisateur et ne le commente pas.
+
+                            Structure ta réponse avec des paragraphes courts et aérés.
+                        """)
+                    }
+                ]
+            )
+
+            yield f"{result.choices[0].message.content}"
+
+            yield {
+                "event": {
+                    "type": "status",
+                    "data": {
+                        "description": "",
+                        "done": True,
+                    },
+                }
+            }
         else:
             yield {
                 "event": {
