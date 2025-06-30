@@ -6,7 +6,7 @@ import sys
 session = requests.Session()
 session.headers.update({
     'Content-Type': 'application/json',
-    'Authorization': f'Bearer {os.environ['ALBERT_OPENAI_API_KEY']}'
+    'Authorization': f'Bearer {os.environ["ALBERT_OPENAI_API_KEY"]}'
 })
 
 response = session.post(
