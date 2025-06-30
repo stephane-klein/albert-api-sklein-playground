@@ -5,6 +5,27 @@ from inspect import cleandoc
 from rag_annuaire import Pipeline
 
 class TestRagAnnuaire(unittest.TestCase):
+    def test_search_annuaire_rag_off_topic(self):
+        pipeline = Pipeline()
+        chunk = list(
+            pipeline.pipe(
+                user_message="De quelle couleur est le soleil ?",
+                model_id=None,
+                messages=None,
+                body=None
+            )
+        )
+        self.assertEqual(
+            chunk[1].strip(),
+            cleandoc("""
+                Le soleil est un objet astronomique et sa couleur n'est pas directement liée à l'annuaire de l'administration de l'État.
+
+                Si vous souhaitez en savoir plus sur la couleur du soleil, vous pouvez vous tourner vers un autre assistant ou un modèle de langage généraliste.
+
+                Par exemple, vous pouvez essayer "Tâches simples" ou "Tâches complexes" pour obtenir des informations sur la couleur du soleil.
+            """)
+        )
+
     def test_search_annuaire_rag(self):
         pipeline = Pipeline()
         chunk = list(
