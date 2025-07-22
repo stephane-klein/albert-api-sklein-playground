@@ -189,3 +189,47 @@ $ ./scripts/search-annuaire.py "Qui est François Bayrou" | jq
           ],
 ...
 ```
+
+## Import Open WebUI Pipelines function
+
+Connexion à l'instance https://albert-dev.beta.numerique.gouv.fr/
+
+```sh
+$ source ./load-ablert-dev.sh
+```
+
+Ce script permet d'upload une fonction [Pipelines](https://docs.openwebui.com/pipelines/) vers une instance Open WebUI:
+
+```sh
+$ ./scripts/upload-pipelines-function.py pipelines/hello_world.py
+{"status":true,"detail":"Pipeline uploaded successfully to ./pipelines/hello_world.py"}
+```
+
+Ensuite, vous pouvez upload des Valves :
+
+```sh
+$ ./scripts/upload-pipelines-function-valves.py pipelines/hello_world_valves.json
+{"FOO":"secret"}
+```
+
+## Import assistant-terminologie-stephane-klein.py Pipelines function
+
+```sh
+$ source ./load-ablert-dev.sh
+```
+
+```sh
+$ ./scripts/upload-pipelines-function.py pipelines/assistant-terminologie-stephane-klein.py
+{"status":true,"detail":"Pipeline uploaded successfully to ./pipelines/assistant-terminologie-stephane-klein.py"}
+```
+
+```
+$ cp ./pipelines/assistant-terminologie-stephane-klein_valves.json.skel ./pipelines/assistant-terminologie-stephane-klein_valves.json
+```
+
+Ajouté vos secrets dans `./pipelines/assistant-terminologie-stephane-klein_valves.json`
+
+```sh
+$ ./scripts/upload-pipelines-function-valves.py ./pipelines/assistant-terminologie-stephane-klein_valves.json
+...
+```

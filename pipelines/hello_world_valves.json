@@ -1,0 +1,6 @@
+{
+    "function_filename": "hello_world.py",
+    "valves": {
+        "FOO": "secret"
+    }
+}

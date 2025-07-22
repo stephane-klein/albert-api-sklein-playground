@@ -1,0 +1,6 @@
+{
+    "function_filename": "assistant-terminologie-stephane-klein.py",
+    "valves": {
+        "openai_api_keys": "secret"
+    }
+}
